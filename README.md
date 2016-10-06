@@ -1,15 +1,21 @@
-# Basic Template
+[![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg)](https://swift.org)
+![Platform Linux, OSX](https://img.shields.io/badge/Platforms-Linux%2C%20OSX-lightgray.svg)
 
-A basic vapor template for starting a new Vapor web application. If you're using vapor toolbox, you can use: `vapor new --template=basic`
+# Swallow
 
-## 📖 Documentation
+Swallow is a simple stub manager using Swift
 
-Visit the Vapor web framework's [documentation](http://docs.vapor.codes) for instructions on how to use this package.
+## Prerequisites
 
-## 💧 Community
+#### Swift
 
-Join the welcoming community of fellow Vapor developers in [slack](http://vapor.team).
+- Swift 3.0 Release
 
-## 🔧 Compatibility
+#### macOS
 
-This package has been tested on macOS and Ubuntu.
+- OS X El Captain 10.11.6
+
+#### Linux
+
+- Ubuntu 14.04
+

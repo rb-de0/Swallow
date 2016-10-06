@@ -1,5 +1,6 @@
 [![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg)](https://swift.org)
 ![Platform Linux, OSX](https://img.shields.io/badge/Platforms-Linux%2C%20OSX-lightgray.svg)
+[![Build Status](https://travis-ci.org/rb-de0/Swallow.svg?branch=master)](https://travis-ci.org/rb-de0/Swallow)
 
 # Swallow
 

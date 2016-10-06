@@ -19,7 +19,7 @@ Swallow is a simple stub manager using Swift
 
 - Ubuntu 14.04
 
-#### LICENSE
+## LICENSE
 
 Swallow is released under the MIT License. See the license file for more info.
 

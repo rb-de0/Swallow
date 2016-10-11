@@ -1,6 +1,7 @@
 import Vapor
+import VaporMySQL
 
-let drop = Droplet()
+let drop = Droplet(preparations:[Project.self, Api.self, Entity.self], providers: [VaporMySQL.Provider.self])
 
 drop.get { req in
     let lang = req.headers["Accept-Language"]?.string ?? "en"

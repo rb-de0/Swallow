@@ -13,6 +13,10 @@ struct Entity: Model{
     let createdAt: String
     var updatedAt: String?
     
+    public static var entity: String {
+        return "entities"
+    }
+    
     init(name: String, content: String, apiId: Node){
         self.name = name
         self.content = content

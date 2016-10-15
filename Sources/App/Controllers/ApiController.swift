@@ -11,11 +11,25 @@ final class ApiController: ResourceRepresentable {
         return api
     }
     
+    func store(request: Request) throws -> ResponseRepresentable {
+        var newApi = try request.api()
+        try newApi.save()
+        return newApi
+    }
+    
     // MARK: - ResourceRepresentable
     func makeResource() -> Resource<Api> {
         return Resource(
             index: index,
+            store: store,
             show: show
         )
+    }
+}
+
+extension Request {
+    func api() throws -> Api {
+        guard let json = json else { throw Abort.badRequest }
+        return try Api(node: json)
     }
 }

@@ -12,4 +12,10 @@ drop.get { req in
 
 drop.resource("posts", PostController())
 
+drop.resource("projects", ProjectController())
+
+drop.resource("projects/:id/apis", ApiController())
+
+drop.resource("projects/:id/apis/:id/entities", EntityController())
+
 drop.run()

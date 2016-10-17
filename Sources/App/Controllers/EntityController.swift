@@ -1,10 +1,17 @@
 import Vapor
 import HTTP
 
-final class EntityController: ResourceRepresentable {
+final class EntityController: Controller {
+    
+    private weak var drop: Droplet!
+    
+    init(drop: Droplet) {
+        self.drop = drop
+    }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try Entity.all().makeNode().converted(to: JSON.self)
+        return try drop.view.make("entities")
+        //return try Entity.all().makeNode().converted(to: JSON.self)
     }
     
     func show(request: Request, entity: Entity) throws -> ResponseRepresentable {

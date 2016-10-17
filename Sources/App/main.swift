@@ -9,8 +9,8 @@ drop.resource("", ProjectController(drop: drop))
 
 drop.resource("projects", ProjectController(drop: drop))
 
-drop.resource("projects/:id/apis", ApiController())
+drop.resource("projects/:id/apis", ApiController(drop: drop))
 
-drop.resource("projects/:id/apis/:id/entities", EntityController())
+drop.resource("projects/:id/apis/:id/entities", EntityController(drop: drop))
 
 drop.run()

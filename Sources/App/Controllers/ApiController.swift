@@ -1,10 +1,17 @@
 import Vapor
 import HTTP
 
-final class ApiController: ResourceRepresentable {
+final class ApiController: Controller {
+    
+    private weak var drop: Droplet!
+    
+    init(drop: Droplet) {
+        self.drop = drop
+    }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try Api.all().makeNode().converted(to: JSON.self)
+        return try drop.view.make("apis")
+        //return try Api.all().makeNode().converted(to: JSON.self)
     }
     
     func show(request: Request, api: Api) throws -> ResponseRepresentable {

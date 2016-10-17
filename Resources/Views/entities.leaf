@@ -25,7 +25,7 @@
 
   <div class="statusbar">
     <div class="container">
-      TOP
+      Project1 → API 1 → Version 4
     </div>
   </div>
 
@@ -35,17 +35,24 @@
         <div id="leftpanel" class="col-lg-2">
 
           <div class="row-top">
-            <a class="btn btn-default" href="/">Add Project</a>
+            <a class="btn btn-default" href="/">Add New Version</a>
           </div>
 
-          <div class="title">Project List</div>
+          <div class="title">Version</div>
 
           <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="/">Project1</a></li>
-            <li><a href="/">Project2</a></li>
-            <li><a href="/">Project3</a></li>
-            <li><a href="/">Project4</a></li>
+            <li class="active"><a href="/">Version 4</a></li>
+            <li><a href="/">Version 3</a></li>
+            <li><a href="/">Version 2</a></li>
+            <li><a href="/">Version 1</a></li>
           </ul>
+        </div>
+
+        <div class="col-lg-10">
+
+          <div class="title">API1 Version4</div>
+          <textarea class="input-entity form-control" rows="20" name="content"></textarea>
+
         </div>
       </div>
     </div>

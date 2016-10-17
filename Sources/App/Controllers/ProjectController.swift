@@ -1,7 +1,7 @@
 import Vapor
 import HTTP
 
-final class ProjectController: ResourceRepresentable {
+final class ProjectController: Controller {
     
     private weak var drop: Droplet!
     

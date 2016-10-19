@@ -41,25 +41,25 @@
             <li><a href="/">Project4</a></li>
           </ul>
         </div>
-        
-        
+
+
         <div class="col-md-10">
-            <div class="row-top"></div>
-            
-            <div class="row">
-                <div class="title-form col-md-2">API Name</div>
-                <div class="col-md-10">
-                    <input type="text" class="input-entity form-control" name="name" placeholder="API Name">
-                </div>
-                
-                <div class="title-form col-md-2">API Path</div>
-                <div class="col-md-10">
-                    <input type="text" class="input-entity form-control" name="name" placeholder="API Path">
-                    <button type="submit" id="register-btn" class="btn btn-default" name="action">Create</button>
-                </div>
+          <div class="row-top"></div>
+          
+          <div class="row">
+            <div class="title-form col-md-2">API Name</div>
+            <div class="col-md-10">
+              <input type="text" class="input-entity form-control" name="name" placeholder="API Name">
             </div>
+
+            <div class="title-form col-md-2">API Path</div>
+            <div class="col-md-10">
+              <input type="text" class="input-entity form-control" name="name" placeholder="API Path">
+              <button type="submit" id="register-btn" class="btn btn-default" name="action">Create</button>
+            </div>
+          </div>
         </div>
-        
+
       </div>
     </div>
   </div>

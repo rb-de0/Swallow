@@ -1,10 +1,17 @@
 import Vapor
 import HTTP
 
-final class ProjectController: ResourceRepresentable {
+final class ProjectController: Controller {
+    
+    private weak var drop: Droplet!
+    
+    init(drop: Droplet) {
+        self.drop = drop
+    }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try Project.all().makeNode().converted(to: JSON.self)
+        return try drop.view.make("projects")
+        //return try Project.all().makeNode().converted(to: JSON.self)
     }
     
     func show(request: Request, project: Project) throws -> ResponseRepresentable {

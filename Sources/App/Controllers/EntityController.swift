@@ -1,5 +1,6 @@
 import Vapor
 import HTTP
+import Fluent
 
 final class EntityController: Controller {
     
@@ -10,8 +11,25 @@ final class EntityController: Controller {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try drop.view.make("entities")
-        //return try Entity.all().makeNode().converted(to: JSON.self)
+        
+        guard let id = request.parameters["id"], let api = try Api.find(id) else{
+            return "hoge"
+        }
+        
+        let project = try api.parent(api.projectId) as Parent<Project>
+        
+        guard let projectId = try project.get()?.id else{
+            return "hoge"
+        }
+        
+        let entities = try api.children("id", Entity.self).all().makeNode()
+        
+        return try drop.view.make("entities", Node([
+            "projectId": projectId,
+            "apiId": id,
+            "apiName": Node(api.name),
+            "entities": entities
+        ]))
     }
     
     func show(request: Request, entity: Entity) throws -> ResponseRepresentable {

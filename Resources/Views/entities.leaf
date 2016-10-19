@@ -8,16 +8,8 @@
 <div class="title">Version</div>
 
 <ul class="nav nav-pills nav-stacked">
-  <li class="active"><a href="/">Version 4</a></li>
-  <li><a href="/">Version 3</a></li>
-  <li><a href="/">Version 2</a></li>
-  <li><a href="/">Version 1</a></li>
+  #loop(entities, "entity") {
+    <li><a href="/projects/#(projectId)/apis/#(apiId)/entities/#(entity.id)">#(entity.name)</a></li>
+  }
 </ul>
-}
-
-#export("right") {
-<div class="title">API1 Version4</div>
-<textarea class="input-entity form-control" rows="20" name="content"></textarea>
-
-<button type="submit" id="register-btn" class="btn btn-default" name="action">Update</button>
 }

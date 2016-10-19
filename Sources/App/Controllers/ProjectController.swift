@@ -10,8 +10,8 @@ final class ProjectController: Controller {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try drop.view.make("projects")
-        //return try Project.all().makeNode().converted(to: JSON.self)
+        let projects = try Project.all().makeNode()
+        return try drop.view.make("projects", Node(["projects": projects]))
     }
     
     func show(request: Request, project: Project) throws -> ResponseRepresentable {

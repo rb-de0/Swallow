@@ -8,17 +8,6 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
-.statusbar{
-  width: 100%;
-  height: 24px;
-  line-height: 24px;
-  color: #555;
-  font-size: 14px;
-  font-weight: bold;
-  border-bottom: 1px solid #ddd;
-	text-align: center;
-}
-
 .navbar-brand{
   margin-left: 32px;
   line-height: 36px;
@@ -53,8 +42,19 @@ a:hover{
   font-weight: bold;
 }
 
+.title-form{
+    margin-top: 8px;
+}
+
 .input-entity{
 	width: 100%;
+	margin-bottom: 16px;
+}
+
+#register-btn{
+	float: right;
+	width: 120px;
+	height: 50px;
 }
 
 div.content{

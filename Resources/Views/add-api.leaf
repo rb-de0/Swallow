@@ -27,8 +27,10 @@
     <div class="container">
       <div class="row">
         <div id="leftpanel" class="col-md-2">
-            
-          <div class="row-top"></div>
+
+          <div class="row-top">
+            <a class="btn btn-default" href="/">Add Project</a>
+          </div>
 
           <div class="title">Project List</div>
 
@@ -40,17 +42,24 @@
           </ul>
         </div>
         
+        
         <div class="col-md-10">
             <div class="row-top"></div>
             
             <div class="row">
-                <div class="title-form col-md-2">Project Name</div>
+                <div class="title-form col-md-2">API Name</div>
                 <div class="col-md-10">
-                    <input type="text" class="input-entity form-control" name="name" placeholder="Project Name">
+                    <input type="text" class="input-entity form-control" name="name" placeholder="API Name">
+                </div>
+                
+                <div class="title-form col-md-2">API Path</div>
+                <div class="col-md-10">
+                    <input type="text" class="input-entity form-control" name="name" placeholder="API Path">
                     <button type="submit" id="register-btn" class="btn btn-default" name="action">Create</button>
                 </div>
             </div>
         </div>
+        
       </div>
     </div>
   </div>

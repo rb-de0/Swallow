@@ -23,16 +23,10 @@
     </div>
   </nav>
 
-  <div class="statusbar">
-    <div class="container">
-      Project1
-    </div>
-  </div>
-
   <div class="content">
     <div class="container">
       <div class="row">
-        <div id="leftpanel" class="col-lg-2">
+        <div id="leftpanel" class="col-md-2">
 
           <div class="row-top">
             <a class="btn btn-default" href="/">Add Project</a>
@@ -48,7 +42,7 @@
           </ul>
         </div>
 
-        <div class="col-lg-10">
+        <div class="col-md-10">
 
           <div class="row-top">
             <a class="btn btn-default" href="/">Add API</a>

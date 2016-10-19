@@ -1,45 +1,23 @@
-<!DOCTYPE html>
-<html>
+#extend("base")
 
-<head>
-  <title>Swallow</title>
-  #embed("embeds/resource")
-</head>
+#export("left") {
+<div class="row-top">
+  <a class="btn btn-default" href="/">Add New Version</a>
+</div>
 
-<body>
-  #embed("embeds/header")
+<div class="title">Version</div>
 
-  <div class="content">
-    <div class="container">
-      <div class="row">
-        <div id="leftpanel" class="col-md-2">
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="/">Version 4</a></li>
+  <li><a href="/">Version 3</a></li>
+  <li><a href="/">Version 2</a></li>
+  <li><a href="/">Version 1</a></li>
+</ul>
+}
 
-          <div class="row-top">
-            <a class="btn btn-default" href="/">Add New Version</a>
-          </div>
+#export("right") {
+<div class="title">API1 Version4</div>
+<textarea class="input-entity form-control" rows="20" name="content"></textarea>
 
-          <div class="title">Version</div>
-
-          <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="/">Version 4</a></li>
-            <li><a href="/">Version 3</a></li>
-            <li><a href="/">Version 2</a></li>
-            <li><a href="/">Version 1</a></li>
-          </ul>
-        </div>
-
-        <div class="col-md-10">
-
-          <div class="title">API1 Version4</div>
-          <textarea class="input-entity form-control" rows="20" name="content"></textarea>
-
-          <button type="submit" id="register-btn" class="btn btn-default" name="action">Update</button>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</body>
-</html>
+<button type="submit" id="register-btn" class="btn btn-default" name="action">Update</button>
+}

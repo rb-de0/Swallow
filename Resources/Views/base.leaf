@@ -1,9 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-    #import("head")
-</head>
-    <body>
-        #import("body")
-    </body>
+  
+  <head>
+    <title>#import("title")</title>
+    #embed("embeds/resource")
+  </head>
+  
+  <body>
+    #embed("embeds/header")
+    
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div id="leftpanel" class="col-md-2">
+            #import("left")
+          </div>
+          
+          
+          <div class="col-md-10">
+            #import("right")
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </body>
 </html>

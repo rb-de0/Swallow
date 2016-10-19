@@ -1,52 +1,32 @@
-<!DOCTYPE html>
-<html>
+#extend("base")
 
-<head>
-  <title>Swallow</title>
-  #embed("embeds/resource")
-</head>
+#export("left") {
+<div class="row-top">
+  <a class="btn btn-default" href="/">Add Project</a>
+</div>
 
-<body>
-  #embed("embeds/header")
+<div class="title">Project List</div>
 
-  <div class="content">
-    <div class="container">
-      <div class="row">
-        <div id="leftpanel" class="col-md-2">
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="/">Project1</a></li>
+  <li><a href="/">Project2</a></li>
+  <li><a href="/">Project3</a></li>
+  <li><a href="/">Project4</a></li>
+</ul>
+}
 
-          <div class="row-top">
-            <a class="btn btn-default" href="/">Add Project</a>
-          </div>
+#export("right") {
+<div class="row-top">
+  <a class="btn btn-default" href="/">Add API</a>
+</div>
 
-          <div class="title">Project List</div>
+<div class="title">Project1's API List</div>
 
-          <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="/">Project1</a></li>
-            <li><a href="/">Project2</a></li>
-            <li><a href="/">Project3</a></li>
-            <li><a href="/">Project4</a></li>
-          </ul>
-        </div>
+<ul class="nav nav-stacked">
+  <li class="active"><a href="/">API1</a></li>
+  <li><a href="/">API2</a></li>
+  <li><a href="/">API3</a></li>
+  <li><a href="/">API4</a></li>
+</ul>
+}
 
-        <div class="col-md-10">
-
-          <div class="row-top">
-            <a class="btn btn-default" href="/">Add API</a>
-          </div>
-
-          <div class="title">Project1's API List</div>
-
-          <ul class="nav nav-stacked">
-            <li class="active"><a href="/">API1</a></li>
-            <li><a href="/">API2</a></li>
-            <li><a href="/">API3</a></li>
-            <li><a href="/">API4</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</body>
-</html>

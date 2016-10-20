@@ -5,6 +5,7 @@ import Foundation
 struct Project: Model{
     var id: Node?
     let name: String
+    var isSelected = false
     
     // TODO: remove
     var exists: Bool = false
@@ -21,7 +22,8 @@ struct Project: Model{
     func makeNode(context: Context) throws -> Node {
         return try Node(node: [
             "id": id,
-            "name": name
+            "name": name,
+            "selected": isSelected
         ])
     }
     

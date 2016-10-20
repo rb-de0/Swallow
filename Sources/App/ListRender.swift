@@ -4,8 +4,18 @@ class ListRenderer {
     
     private var context = [String: Node]()
     
-    func addProjects() throws -> Self{
-        let projects = try Project.all().makeNode()
+    func addProjects(selectedId: Node = Node(-1)) throws -> Self{
+        
+        let projects = try Project.all().map{(project: Project) -> Project in
+            var adjusted = project
+            
+            if adjusted.id?.int == selectedId.int{
+                adjusted.isSelected = true
+            }
+            
+            return adjusted
+        }.makeNode()
+        
         context.updateValue(projects, forKey: "projects")
         return self
     }

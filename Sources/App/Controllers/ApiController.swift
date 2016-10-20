@@ -16,7 +16,7 @@ final class ApiController: Controller {
         }
         
         return try ListRenderer()
-            .addProjects()
+            .addProjects(selectedId: projectId)
             .addApis(in: project)
             .make(view: "apis", with: ["projectId": projectId, "projectName": Node(project.name)], using: drop)
     }

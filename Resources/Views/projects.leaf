@@ -16,10 +16,12 @@
 <div class="row-top"></div>
 
 <div class="row">
-  <div class="title-form col-md-2">Project Name</div>
-  <div class="col-md-10">
-    <input type="text" class="input-entity form-control" name="name" placeholder="Project Name">
-    <button type="submit" id="register-btn" class="btn btn-default" name="action">Create</button>
-  </div>
+  <form action="/projects" method="post">
+    <div class="title-form col-md-2">Project Name</div>
+    <div class="col-md-10">
+      <input type="text" class="input-entity form-control" name="name" placeholder="Project Name">
+        <button type="submit" id="register-btn" class="btn btn-default" name="action">Create</button>
+      </div>
+  </form>
 </div>
 }

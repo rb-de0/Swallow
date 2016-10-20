@@ -2,7 +2,7 @@
 
 #export("left") {
 <div class="row-top">
-  <a class="btn btn-default" href="/">Add New Version</a>
+  <a class="btn btn-default" href="/projects/#(projectId)/apis/#(apiId)/entities/register">Add New Version</a>
 </div>
 
 <div class="title">Version</div>

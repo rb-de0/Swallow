@@ -2,16 +2,15 @@
 
 #export("left") {
 <div class="row-top">
-  <a class="btn btn-default" href="/">Add Project</a>
+  <a class="btn btn-default" href="/">Add New Version</a>
 </div>
 
-<div class="title">Project List</div>
+<div class="title">Version</div>
 
 <ul class="nav nav-pills nav-stacked">
-  <li class="active"><a href="/">Project1</a></li>
-  <li><a href="/">Project2</a></li>
-  <li><a href="/">Project3</a></li>
-  <li><a href="/">Project4</a></li>
+  #loop(entities, "entity") {
+    <li><a href="/projects/#(projectId)/apis/#(apiId)/entities/#(entity.id)">#(entity.name)</a></li>
+  }
 </ul>
 }
 
@@ -19,16 +18,18 @@
 <div class="row-top"></div>
 
 <div class="row">
-  <div class="title-form col-md-2">Entity Name</div>
-  <div class="col-md-10">
-    <input type="text" class="input-entity form-control" name="name" placeholder="Entity Name">
-      </div>
+  <form action="/projects/#(projectId)/apis/#(apiId)/entities" method="post">
+    <div class="title-form col-md-2">Entity Name</div>
+    <div class="col-md-10">
+      <input type="text" class="input-entity form-control" name="name" placeholder="Entity Name">
+    </div>
   
-  <div class="title-form col-md-2">Entity Content</div>
-  <div class="col-md-10">
-    <textarea class="input-entity form-control" rows="20" name="content"></textarea>
-    <button type="submit" id="register-btn" class="btn btn-default" name="action">Create</button>
-  </div>
+    <div class="title-form col-md-2">Entity Content</div>
+    <div class="col-md-10">
+      <textarea class="input-entity form-control" rows="20" name="content"></textarea>
+      <button type="submit" id="register-btn" class="btn btn-default" name="action">Create</button>
+    </div>
+  </form>
 </div>
 }
 

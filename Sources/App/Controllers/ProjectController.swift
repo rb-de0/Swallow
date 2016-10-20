@@ -14,29 +14,19 @@ final class ProjectController: Controller {
         return try drop.view.make("projects", Node(["projects": projects]))
     }
     
-    func show(request: Request, project: Project) throws -> ResponseRepresentable {
-        return project
-    }
-    
     func store(request: Request) throws -> ResponseRepresentable {
-        var newProject = try request.project()
+        var newProject = try Project(data: request.data)
         try newProject.save()
-        return newProject
+        
+        let projects = try Project.all().makeNode()
+        return try drop.view.make("projects", Node(["projects": projects]))
     }
     
     // MARK: - ResourceRepresentable
     func makeResource() -> Resource<Project> {
         return Resource(
             index: index,
-            store: store,
-            show: show
+            store: store
         )
-    }
-}
-
-extension Request {
-    func project() throws -> Project {
-        guard let json = json else { throw Abort.badRequest }
-        return try Project(node: json)
     }
 }

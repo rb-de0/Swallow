@@ -16,7 +16,7 @@
 
 #export("right") {
 <div class="row-top">
-  <a class="btn btn-default" href="/">Add API</a>
+  <a class="btn btn-default" href="/projects/#(projectId)/apis/register">Add API</a>
 </div>
 
 <div class="title">#(projectName)'s API List</div>

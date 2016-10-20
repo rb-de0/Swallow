@@ -16,7 +16,7 @@ final class ApiController: Controller {
             return "hoge"
         }
         
-        let apis = try project.children("id", Api.self).all().makeNode()
+        let apis = try project.children("project_id", Api.self).all().makeNode()
 
         return try drop.view.make("apis", Node([
             "projectId": id,
@@ -26,29 +26,31 @@ final class ApiController: Controller {
         ]))
     }
     
-    func show(request: Request, api: Api) throws -> ResponseRepresentable {
-        return api
-    }
-    
     func store(request: Request) throws -> ResponseRepresentable {
-        var newApi = try request.api()
+        
+        guard let projectId = request.parameters["id"], let project = try Project.find(projectId) else{
+            return "hoge"
+        }
+        
+        var newApi = try Api(id: Node(projectId), data: request.data)
         try newApi.save()
-        return newApi
+        
+        let projects = try Project.all().makeNode()
+        let apis = try project.children("project_id", Api.self).all().makeNode()
+        
+        return try drop.view.make("apis", Node([
+            "projectId": projectId,
+            "projectName": Node(project.name),
+            "apis": apis,
+            "projects": projects
+        ]))
     }
     
     // MARK: - ResourceRepresentable
     func makeResource() -> Resource<Api> {
         return Resource(
             index: index,
-            store: store,
-            show: show
+            store: store
         )
-    }
-}
-
-extension Request {
-    func api() throws -> Api {
-        guard let json = json else { throw Abort.badRequest }
-        return try Api(node: json)
     }
 }

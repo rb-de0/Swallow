@@ -13,6 +13,9 @@ struct Entity: Model{
     let createdAt: String
     var updatedAt: String?
     
+    // TODO: remove
+    var exists: Bool = false
+    
     public static var entity: String {
         return "entities"
     }
@@ -57,5 +60,15 @@ struct Entity: Model{
     
     static func revert(_ database: Database) throws {
         try database.delete("entities")
+    }
+}
+
+extension Entity{
+    init(id: Node, data: Content) throws {
+        guard let name = data["name"]?.string, let content = data["content"]?.string else{
+            throw NSError(domain: "parseError", code: -1, userInfo: nil)
+        }
+        
+        self.init(name: name, content: content, apiId: id)
     }
 }

@@ -9,6 +9,9 @@ struct Api: Model{
     let name: String
     let path: String
     
+    // TODO: remove
+    var exists: Bool = false
+    
     init(name: String, path: String, projectId: Node){
         self.name = name
         self.path = path
@@ -42,5 +45,15 @@ struct Api: Model{
     
     static func revert(_ database: Database) throws {
         try database.delete("apis")
+    }
+}
+
+extension Api{
+    init(id: Node, data: Content) throws {
+        guard let name = data["name"]?.string, let path = data["path"]?.string else{
+            throw NSError(domain: "parseError", code: -1, userInfo: nil)
+        }
+        
+        self.init(name: name, path: path, projectId: id)
     }
 }

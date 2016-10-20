@@ -22,7 +22,7 @@ final class EntityController: Controller {
             return "hoge"
         }
         
-        let entities = try api.children("id", Entity.self).all().makeNode()
+        let entities = try api.children("api_id", Entity.self).all().makeNode()
         
         return try drop.view.make("entities", Node([
             "projectId": projectId,
@@ -37,9 +37,28 @@ final class EntityController: Controller {
     }
     
     func store(request: Request) throws -> ResponseRepresentable {
-        var newEntity = try request.entity()
+        
+        guard let apiId = request.parameters["id"], let api = try Api.find(apiId) else{
+            return "hoge"
+        }
+        
+        var newEntity = try Entity(id: Node(apiId), data: request.data)
         try newEntity.save()
-        return newEntity
+        
+        let project = try api.parent(api.projectId) as Parent<Project>
+        
+        guard let projectId = try project.get()?.id else{
+            return "hoge"
+        }
+        
+        let entities = try api.children("api_id", Entity.self).all().makeNode()
+        
+        return try drop.view.make("entities", Node([
+            "projectId": projectId,
+            "apiId": apiId,
+            "apiName": Node(api.name),
+            "entities": entities
+        ]))
     }
     
     // MARK: - ResourceRepresentable
@@ -49,12 +68,5 @@ final class EntityController: Controller {
             store: store,
             show: show
         )
-    }
-}
-
-extension Request {
-    func entity() throws -> Entity {
-        guard let json = json else { throw Abort.badRequest }
-        return try Entity(node: json)
     }
 }

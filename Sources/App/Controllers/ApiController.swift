@@ -23,17 +23,14 @@ final class ApiController: Controller {
     
     func store(request: Request) throws -> ResponseRepresentable {
         
-        guard let projectId = request.parameters["id"], let project = try Project.find(projectId) else{
+        guard let projectId = request.parameters["id"] else{
             return Response(status: .badRequest)
         }
         
         var newApi = try Api(id: Node(projectId), data: request.data)
         try newApi.save()
         
-        return try ListRenderer()
-            .addProjects()
-            .addApis(in: project)
-            .make(view: "apis", with: ["projectId": projectId, "projectName": Node(project.name)], using: drop)
+        return Response(redirect: request.uri.path)
     }
     
     // MARK: - ResourceRepresentable

@@ -17,7 +17,7 @@ final class ProjectController: Controller {
         var newProject = try Project(data: request.data)
         try newProject.save()
         
-        return try ListRenderer().addProjects().make(view: "projects", using: drop)
+        return Response(redirect: request.uri.path)
     }
     
     // MARK: - ResourceRepresentable

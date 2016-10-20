@@ -7,8 +7,8 @@ struct Entity: Model{
     
     let apiId: Node
     
-    let name: String
-    let content: String
+    var name: String
+    var content: String
     
     let createdAt: String
     var updatedAt: String?

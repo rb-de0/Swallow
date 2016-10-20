@@ -12,19 +12,13 @@ final class EntityRegisterController: Controller {
     
     func index(request: Request) throws -> ResponseRepresentable {
         
-        guard let apiId = request.parameters["id"], let api = try Api.find(apiId) else{
-            return Response(status: .badRequest)
-        }
-        
-        let project = try api.parent(api.projectId) as Parent<Project>
-        
-        guard let projectId = try project.get()?.id else{
+        guard let apiId = request.parameters["id"], let api = try Api.find(apiId), let projectId = try Project.find(api.projectId)?.id  else{
             return Response(status: .badRequest)
         }
         
         return try ListRenderer()
             .addEntities(in: api)
-            .make(view: "entities",
+            .make(view: "add-entity",
                   with: ["projectId": projectId, "apiId": apiId],
                   using: drop)
     }

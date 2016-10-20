@@ -2,7 +2,7 @@
 
 #export("left") {
 <div class="row-top">
-  <a class="btn btn-default" href="/">Add New Version</a>
+  <a class="btn btn-default" href="/projects/#(projectId)/apis/#(apiId)/entities/register">Add New Version</a>
 </div>
 
 <div class="title">Version</div>
@@ -15,8 +15,22 @@
 }
 
 #export("right") {
-<div class="title">API1 Version4</div>
-<textarea class="input-entity form-control" rows="20" name="content"></textarea>
+<div class="row-top"></div>
 
-<button type="submit" id="register-btn" class="btn btn-default" name="action">Update</button>
+<div class="row">
+  <form action="/projects/#(projectId)/apis/#(apiId)/entities" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <input name="id" type="hidden" value="#(id)">
+    <div class="title-form col-md-2">Entity Name</div>
+    <div class="col-md-10">
+      <input type="text" class="input-entity form-control" value="#(name)" name="name" placeholder="Entity Name">
+    </div>
+
+    <div class="title-form col-md-2">Entity Content</div>
+    <div class="col-md-10">
+      <textarea class="input-entity form-control" rows="20" name="content">#(content)</textarea>
+      <button type="submit" id="register-btn" class="btn btn-default" name="action">Update</button>
+    </div>
+  </form>
+</div>
 }

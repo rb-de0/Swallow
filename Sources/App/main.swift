@@ -7,12 +7,16 @@ drop.resource("", ProjectController(drop: drop))
 
 drop.resource("projects", ProjectController(drop: drop))
 
-drop.resource("projects/:id/apis", ApiController(drop: drop))
+drop.resource("projects/:projectId/apis", ApiController(drop: drop))
 
-drop.resource("projects/:id/apis/register", ApiRegisterController(drop: drop))
+drop.resource("projects/:projectId/apis/register", ApiRegisterController(drop: drop))
 
-drop.resource("projects/:id/apis/:id/entities", EntityController(drop: drop))
+drop.resource("projects/:projectId/apis/:apiId/entities", EntityController(drop: drop))
 
-drop.resource("projects/:id/apis/:id/entities/register", EntityRegisterController(drop: drop))
+drop.resource("projects/:projectId/apis/:apiId/entities/register", EntityRegisterController(drop: drop))
+
+drop.resource("get/projects/:projectId/apis/:apiId/entities/:entityId", EntityProvideController(drop: drop))
+
+drop.resource("get/projects/:projectId/apis/:apiId/entities", EntityProvideController(drop: drop))
 
 drop.run()

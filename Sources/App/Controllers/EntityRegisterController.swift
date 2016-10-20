@@ -12,7 +12,7 @@ final class EntityRegisterController: Controller {
     
     func index(request: Request) throws -> ResponseRepresentable {
         
-        guard let apiId = request.parameters["id"], let api = try Api.find(apiId), let projectId = try Project.find(api.projectId)?.id  else{
+        guard let apiId = request.parameters["apiId"], let api = try Api.find(apiId), let projectId = request.parameters["projectId"] else{
             return Response(status: .badRequest)
         }
         

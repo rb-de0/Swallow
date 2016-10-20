@@ -11,7 +11,7 @@ final class ApiController: Controller {
     
     func index(request: Request) throws -> ResponseRepresentable {
         
-        guard let projectId = request.parameters["id"], let project = try Project.find(projectId) else{
+        guard let projectId = request.parameters["projectId"], let project = try Project.find(projectId) else{
             return Response(status: .badRequest)
         }
         
@@ -23,7 +23,7 @@ final class ApiController: Controller {
     
     func store(request: Request) throws -> ResponseRepresentable {
         
-        guard let projectId = request.parameters["id"] else{
+        guard let projectId = request.parameters["projectId"] else{
             return Response(status: .badRequest)
         }
         

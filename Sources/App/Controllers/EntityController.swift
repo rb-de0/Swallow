@@ -2,6 +2,8 @@ import Vapor
 import HTTP
 import Fluent
 
+import Foundation
+
 final class EntityController: Controller {
     
     private weak var drop: Droplet!
@@ -12,7 +14,7 @@ final class EntityController: Controller {
     
     func index(request: Request) throws -> ResponseRepresentable {
         
-        guard let apiId = request.parameters["id"], let api = try Api.find(apiId), let projectId = try Project.find(api.projectId)?.id else{
+        guard let apiId = request.parameters["apiId"], let api = try Api.find(apiId), let projectId = request.parameters["projectId"] else{
             return Response(status: .badRequest)
         }
         
@@ -26,7 +28,7 @@ final class EntityController: Controller {
     
     func show(request: Request, entity: Entity) throws -> ResponseRepresentable {
         
-        guard let api = try Api.find(entity.apiId), let projectId = try Project.find(api.projectId)?.id else{
+        guard let api = try Api.find(entity.apiId), let projectId = request.parameters["projectId"] else{
             return Response(status: .badRequest)
         }
         
@@ -48,7 +50,7 @@ final class EntityController: Controller {
             return try update(request: request, entity: entity)
         }
         
-        guard let apiId = request.parameters["id"] else{
+        guard let apiId = request.parameters["apiId"] else{
             return Response(status: .badRequest)
         }
         
@@ -65,6 +67,7 @@ final class EntityController: Controller {
         var copy = entity
         copy.content = modified.content
         copy.name = modified.name
+        copy.updatedAt = String(describing: Date())
         
         try copy.save()
         

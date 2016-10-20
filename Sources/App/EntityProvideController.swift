@@ -1,7 +1,8 @@
 import Vapor
 import HTTP
+import Fluent
 
-final class ApiRegisterController: Controller {
+final class EntityProvideController: Controller {
     
     private weak var drop: Droplet!
     
@@ -11,13 +12,18 @@ final class ApiRegisterController: Controller {
     
     func index(request: Request) throws -> ResponseRepresentable {
         
-        guard let id = request.parameters["projectId"] else{
+        if let entityId = request.parameters["entityId"], let entity = try Entity.find(entityId){
+            return entity.content
+        }
+        
+        guard let apiId = request.parameters["apiId"],
+            let api = try Api.find(apiId),
+            let first = try api.children("api_id", Entity.self).all().first else{
+                
             return Response(status: .badRequest)
         }
         
-        return try ListRenderer()
-            .addProjects()
-            .make(view: "app-api", with: ["projectId": id] , using: drop)
+        return first.content
     }
     
     // MARK: - ResourceRepresentable

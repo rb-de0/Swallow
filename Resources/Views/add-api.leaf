@@ -27,7 +27,7 @@
     <div class="title-form col-md-2">API Path</div>
     <div class="col-md-10">
       <input type="text" class="input-entity form-control" name="path" placeholder="API Path">
-      <button type="submit" id="register-btn" class="btn btn-default" name="action">Create</button>
+      <button type="submit" class="post-btn btn-swallow-default btn btn-default" name="action">Create</button>
     </div>
   </form>
 </div>

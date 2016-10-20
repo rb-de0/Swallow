@@ -51,10 +51,20 @@ a:hover{
 	margin-bottom: 16px;
 }
 
-#register-btn{
+.btn-swallow-default{
+   	width: 120px;
+    height: 50px;
+}
+
+.post-btn{
 	float: right;
-	width: 120px;
-	height: 50px;
+}
+
+.download-btn{
+    margin-right: 16px;
+    float: right;
+    padding: 0px;
+    line-height: 50px;
 }
 
 div.content{

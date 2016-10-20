@@ -19,4 +19,6 @@ drop.resource("get/projects/:projectId/apis/:apiId/entities/:entityId", EntityPr
 
 drop.resource("get/projects/:projectId/apis/:apiId/entities", EntityProvideController(drop: drop))
 
+drop.resource("download/projects/:projectId/apis/:apiId/entities/:entityId", EntityDownloadController(drop: drop))
+
 drop.run()

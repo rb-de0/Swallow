@@ -29,7 +29,8 @@
     <div class="title-form col-md-2">Entity Content</div>
     <div class="col-md-10">
       <textarea class="input-entity form-control" rows="20" name="content">#(content)</textarea>
-      <button type="submit" id="register-btn" class="btn btn-default" name="action">Update</button>
+      <button type="submit" class="post-btn btn-swallow-default btn btn-default" name="action">Update</button>
+      <a class="download-btn btn-swallow-default btn btn-default" href="/download/projects/#(projectId)/apis/#(apiId)/entities/#(id)">Download</a>
     </div>
   </form>
 </div>

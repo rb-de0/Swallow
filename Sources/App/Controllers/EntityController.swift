@@ -12,24 +12,22 @@ final class EntityController: Controller {
     
     func index(request: Request) throws -> ResponseRepresentable {
         
-        guard let id = request.parameters["id"], let api = try Api.find(id) else{
-            return "hoge"
+        guard let apiId = request.parameters["id"], let api = try Api.find(apiId) else{
+            return Response(status: .badRequest)
         }
         
         let project = try api.parent(api.projectId) as Parent<Project>
         
         guard let projectId = try project.get()?.id else{
-            return "hoge"
+            return Response(status: .badRequest)
         }
         
-        let entities = try api.children("api_id", Entity.self).all().makeNode()
-        
-        return try drop.view.make("entities", Node([
-            "projectId": projectId,
-            "apiId": id,
-            "apiName": Node(api.name),
-            "entities": entities
-        ]))
+        return try ListRenderer()
+            .addEntities(in: api)
+            .make(view: "entities",
+                  with: ["projectId": projectId, "apiId": apiId, "apiName": Node(api.name)],
+                  using: drop)
+
     }
     
     func show(request: Request, entity: Entity) throws -> ResponseRepresentable {
@@ -39,7 +37,7 @@ final class EntityController: Controller {
     func store(request: Request) throws -> ResponseRepresentable {
         
         guard let apiId = request.parameters["id"], let api = try Api.find(apiId) else{
-            return "hoge"
+            return Response(status: .badRequest)
         }
         
         var newEntity = try Entity(id: Node(apiId), data: request.data)
@@ -48,17 +46,14 @@ final class EntityController: Controller {
         let project = try api.parent(api.projectId) as Parent<Project>
         
         guard let projectId = try project.get()?.id else{
-            return "hoge"
+            return Response(status: .badRequest)
         }
         
-        let entities = try api.children("api_id", Entity.self).all().makeNode()
-        
-        return try drop.view.make("entities", Node([
-            "projectId": projectId,
-            "apiId": apiId,
-            "apiName": Node(api.name),
-            "entities": entities
-        ]))
+        return try ListRenderer()
+            .addEntities(in: api)
+            .make(view: "entities",
+                  with: ["projectId": projectId, "apiId": apiId, "apiName": Node(api.name)],
+                  using: drop)
     }
     
     // MARK: - ResourceRepresentable

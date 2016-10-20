@@ -10,16 +10,14 @@ final class ProjectController: Controller {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        let projects = try Project.all().makeNode()
-        return try drop.view.make("projects", Node(["projects": projects]))
+        return try ListRenderer().addProjects().make(view: "projects", using: drop)
     }
     
     func store(request: Request) throws -> ResponseRepresentable {
         var newProject = try Project(data: request.data)
         try newProject.save()
         
-        let projects = try Project.all().makeNode()
-        return try drop.view.make("projects", Node(["projects": projects]))
+        return try ListRenderer().addProjects().make(view: "projects", using: drop)
     }
     
     // MARK: - ResourceRepresentable

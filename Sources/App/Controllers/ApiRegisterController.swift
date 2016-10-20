@@ -10,16 +10,14 @@ final class ApiRegisterController: Controller {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        let projects = try Project.all().makeNode()
         
         guard let id = request.parameters["id"] else{
-            return "hoge"
+            return Response(status: .badRequest)
         }
         
-        return try drop.view.make("add-api", Node([
-            "projectId": id,
-            "projects": projects
-        ]))
+        return try ListRenderer()
+            .addProjects()
+            .make(view: "app-api", with: ["projectId": id] , using: drop)
     }
     
     // MARK: - ResourceRepresentable

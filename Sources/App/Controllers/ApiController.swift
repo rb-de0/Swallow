@@ -10,40 +10,30 @@ final class ApiController: Controller {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        let projects = try Project.all().makeNode()
         
-        guard let id = request.parameters["id"], let project = try Project.find(id) else{
-            return "hoge"
+        guard let projectId = request.parameters["id"], let project = try Project.find(projectId) else{
+            return Response(status: .badRequest)
         }
         
-        let apis = try project.children("project_id", Api.self).all().makeNode()
-
-        return try drop.view.make("apis", Node([
-            "projectId": id,
-            "projectName": Node(project.name),
-            "apis": apis,
-            "projects": projects
-        ]))
+        return try ListRenderer()
+            .addProjects()
+            .addApis(in: project)
+            .make(view: "apis", with: ["projectId": projectId, "projectName": Node(project.name)], using: drop)
     }
     
     func store(request: Request) throws -> ResponseRepresentable {
         
         guard let projectId = request.parameters["id"], let project = try Project.find(projectId) else{
-            return "hoge"
+            return Response(status: .badRequest)
         }
         
         var newApi = try Api(id: Node(projectId), data: request.data)
         try newApi.save()
         
-        let projects = try Project.all().makeNode()
-        let apis = try project.children("project_id", Api.self).all().makeNode()
-        
-        return try drop.view.make("apis", Node([
-            "projectId": projectId,
-            "projectName": Node(project.name),
-            "apis": apis,
-            "projects": projects
-        ]))
+        return try ListRenderer()
+            .addProjects()
+            .addApis(in: project)
+            .make(view: "apis", with: ["projectId": projectId, "projectName": Node(project.name)], using: drop)
     }
     
     // MARK: - ResourceRepresentable

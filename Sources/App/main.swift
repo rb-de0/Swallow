@@ -1,7 +1,11 @@
 import Vapor
 import VaporMySQL
 
-let drop = Droplet(preparations:[Project.self, Api.self, Entity.self], providers: [VaporMySQL.Provider.self])
+let drop = Droplet()
+
+drop.addProvider(try VaporMySQL.Provider(config: drop.config))
+
+drop.preparations = [Project.self, Api.self, Entity.self]
 
 drop.resource("", ProjectController(drop: drop))
 

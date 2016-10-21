@@ -10,33 +10,34 @@ final class ApiController: Controller {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try drop.view.make("apis")
-        //return try Api.all().makeNode().converted(to: JSON.self)
-    }
-    
-    func show(request: Request, api: Api) throws -> ResponseRepresentable {
-        return api
+        
+        guard let projectId = request.parameters["projectId"], let project = try Project.find(projectId) else{
+            return Response(status: .badRequest)
+        }
+        
+        return try ListRenderer()
+            .addProjects(selectedId: projectId)
+            .addApis(in: project)
+            .make(view: "apis", with: ["projectId": projectId, "projectName": Node(project.name)], using: drop)
     }
     
     func store(request: Request) throws -> ResponseRepresentable {
-        var newApi = try request.api()
+        
+        guard let projectId = request.parameters["projectId"] else{
+            return Response(status: .badRequest)
+        }
+        
+        var newApi = try Api(id: Node(projectId), data: request.data)
         try newApi.save()
-        return newApi
+        
+        return Response(redirect: request.uri.path)
     }
     
     // MARK: - ResourceRepresentable
     func makeResource() -> Resource<Api> {
         return Resource(
             index: index,
-            store: store,
-            show: show
+            store: store
         )
-    }
-}
-
-extension Request {
-    func api() throws -> Api {
-        guard let json = json else { throw Abort.badRequest }
-        return try Api(node: json)
     }
 }

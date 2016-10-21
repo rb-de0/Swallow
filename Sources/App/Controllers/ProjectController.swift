@@ -10,33 +10,21 @@ final class ProjectController: Controller {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try drop.view.make("projects")
-        //return try Project.all().makeNode().converted(to: JSON.self)
-    }
-    
-    func show(request: Request, project: Project) throws -> ResponseRepresentable {
-        return project
+        return try ListRenderer().addProjects().make(view: "projects", using: drop)
     }
     
     func store(request: Request) throws -> ResponseRepresentable {
-        var newProject = try request.project()
+        var newProject = try Project(data: request.data)
         try newProject.save()
-        return newProject
+        
+        return Response(redirect: request.uri.path)
     }
     
     // MARK: - ResourceRepresentable
     func makeResource() -> Resource<Project> {
         return Resource(
             index: index,
-            store: store,
-            show: show
+            store: store
         )
-    }
-}
-
-extension Request {
-    func project() throws -> Project {
-        guard let json = json else { throw Abort.badRequest }
-        return try Project(node: json)
     }
 }

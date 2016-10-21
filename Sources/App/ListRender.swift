@@ -14,9 +14,9 @@ class ListRenderer {
             }
             
             return adjusted
-        }.makeNode()
+        }.flatMap{try? $0.makeNode()}
         
-        context.updateValue(projects, forKey: "projects")
+        context.updateValue(Node(projects), forKey: "projects")
         return self
     }
     

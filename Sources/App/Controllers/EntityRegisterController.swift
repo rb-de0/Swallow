@@ -16,10 +16,11 @@ final class EntityRegisterController: Controller {
             return Response(status: .badRequest)
         }
         
-        return try ListRenderer()
+        return try Renderer()
             .addEntities(in: api)
             .addProject(from: request)
             .addApi(from: request)
+            .beSecure(with: request, using: drop)
             .make(view: "add-entity",
                   using: drop)
     }

@@ -20,7 +20,7 @@ final class EntityController: Controller {
             return Response(status: .badRequest)
         }
         
-        return try ListRenderer()
+        return try Renderer()
             .addEntities(in: api)
             .addProject(from: request)
             .addApi(from: request)
@@ -34,7 +34,7 @@ final class EntityController: Controller {
             return Response(status: .badRequest)
         }
         
-        return try ListRenderer()
+        return try Renderer()
             .addEntities(in: api)
             .addProject(from: request)
             .addApi(from: request)
@@ -46,6 +46,8 @@ final class EntityController: Controller {
     }
     
     func store(request: Request) throws -> ResponseRepresentable {
+        
+        try CsrfHelper.verifyAuthenticityToken(with: request)
         
         if request.data["_method"]?.string == "patch", let entityId = request.data["id"]?.string, let entity = try Entity.find(entityId) {
             return try update(request: request, entity: entity)
@@ -62,6 +64,8 @@ final class EntityController: Controller {
     }
     
     func update(request: Request, entity: Entity) throws -> ResponseRepresentable {
+        
+        try CsrfHelper.verifyAuthenticityToken(with: request)
         
         let modified = try Entity(id: entity.apiId, data: request.data)
         

@@ -10,10 +10,16 @@ final class ProjectController: Controller {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try ListRenderer().addProjects().make(view: "projects", using: drop)
+        return try Renderer()
+            .addProjects()
+            .beSecure(with: request, using: drop)
+            .make(view: "projects", using: drop)
     }
     
     func store(request: Request) throws -> ResponseRepresentable {
+        
+        try CsrfHelper.verifyAuthenticityToken(with: request)
+        
         var newProject = try Project(data: request.data)
         try newProject.save()
         

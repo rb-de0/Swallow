@@ -1,7 +1,7 @@
 import Vapor
 import HTTP
 
-class ListRenderer {
+class Renderer {
     
     private var context = [String: Node]()
     
@@ -61,6 +61,15 @@ class ListRenderer {
         }.flatMap{try? $0.makeNode()}
         
         context.updateValue(Node(entities), forKey: "entities")
+        return self
+    }
+    
+    func beSecure(with request: Request, using drop: Droplet)-> Self{
+        if let token = CsrfHelper.getAuthenticityToken(with: request, using: drop){
+            print(token)
+            context.updateValue(token, forKey: "authenticity_token")
+        }
+        
         return self
     }
     

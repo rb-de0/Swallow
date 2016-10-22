@@ -22,6 +22,7 @@
 
 <div class="row">
   <form action="/projects/#(projectId)/apis/#(apiId)/entities" method="post">
+    <input type="hidden" name="authenticity_token" value="#(authenticity_token)">
     <div class="title-form col-md-2">Entity Name</div>
     <div class="col-md-10">
       <input type="text" class="input-entity form-control" name="name" placeholder="Entity Name">

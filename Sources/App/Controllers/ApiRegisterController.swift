@@ -15,9 +15,10 @@ final class ApiRegisterController: Controller {
             return Response(status: .badRequest)
         }
 
-        return try ListRenderer()
+        return try Renderer()
             .addProjects(selectedId: id)
             .addProject(from: request)
+            .beSecure(with: request, using: drop)
             .make(view: "add-api", using: drop)
     }
     

@@ -23,6 +23,7 @@
 
 <div class="row">
   <form action="/projects/#(projectId)/apis" method="post">
+    <input type="hidden" name="authenticity_token" value="#(authenticity_token)">
     <div class="title-form col-md-2">API Name</div>
     <div class="col-md-10">
       <input type="text" class="input-entity form-control" name="name" placeholder="API Name">

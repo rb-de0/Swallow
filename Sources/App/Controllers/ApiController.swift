@@ -15,7 +15,7 @@ final class ApiController: Controller {
             return Response(status: .badRequest)
         }
         
-        return try ListRenderer()
+        return try Renderer()
             .addProjects(selectedId: projectId)
             .addApis(in: project)
             .addProject(from: request)
@@ -23,6 +23,8 @@ final class ApiController: Controller {
     }
     
     func store(request: Request) throws -> ResponseRepresentable {
+        
+        try CsrfHelper.verifyAuthenticityToken(with: request)
         
         guard let projectId = request.parameters["projectId"] else{
             return Response(status: .badRequest)

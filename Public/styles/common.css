@@ -1,4 +1,9 @@
+html{
+    height: 100%;
+}
+
 body {
+    height: 100%;
 	padding-top: 64px;
 	font-family: sans-serif;
 }
@@ -6,6 +11,7 @@ body {
 .navbar{
   height: 64px;
   border-bottom: 1px solid #ddd;
+  background-color: #fff;
 }
 
 .navbar-brand{
@@ -32,6 +38,10 @@ a:hover{
 
 .row-top{
 	margin-top: 16px;
+}
+
+.row{
+    height: 100%;
 }
 
 .title{
@@ -69,8 +79,19 @@ a:hover{
 
 div.content{
 	margin: 0px auto;
+    height: 100%;
 	width: 100%;
 	text-align: center;
+}
+
+body > #leftpanel {
+    height: auto;
+}
+
+#leftpanel{
+    min-height: 100%;
+    padding-left: 24px;
+    border-right: 1px solid #ddd;
 }
 
 .clearbox{

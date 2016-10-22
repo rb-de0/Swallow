@@ -66,6 +66,7 @@ class Renderer {
     
     func beSecure(with request: Request, using drop: Droplet)-> Self{
         if let token = CsrfHelper.getAuthenticityToken(with: request, using: drop){
+            print(token)
             context.updateValue(token, forKey: "authenticity_token")
         }
         

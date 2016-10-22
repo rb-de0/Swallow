@@ -8,6 +8,8 @@ class CsrfHelper{
     
     class func getAuthenticityToken(with request: Request, using drop: Droplet) -> Node?{
         
+        try! request.session().data["start"] = ""
+        
         guard let session = try? request.session(), let identifier = session.identifier else{
             return nil
         }

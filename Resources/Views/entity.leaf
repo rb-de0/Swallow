@@ -15,6 +15,9 @@
 }
 
 #export("right") {
+
+<script src="/js/input-helper.js"></script>
+
 <div class="row-top"></div>
 
 <div class="row">

@@ -26,9 +26,18 @@ class ListRenderer {
         return self
     }
     
-    func addEntities(in api: Api) throws -> Self{
-        let entities = try api.children("api_id", Entity.self).all().makeNode()
-        context.updateValue(entities, forKey: "entities")
+    func addEntities(in api: Api, selectedId: Node = Node(-1)) throws -> Self{
+        let entities = try api.children("api_id", Entity.self).all().map{(entity: Entity) -> Entity in
+            var adjusted = entity
+            
+            if adjusted.id?.int == selectedId.int{
+                adjusted.isSelected = true
+            }
+            
+            return adjusted
+        }.flatMap{try? $0.makeNode()}
+        
+        context.updateValue(Node(entities), forKey: "entities")
         return self
     }
     

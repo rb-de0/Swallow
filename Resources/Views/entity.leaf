@@ -9,7 +9,11 @@
 
 <ul class="nav nav-pills nav-stacked">
   #loop(entities, "entity") {
-    <li><a href="/projects/#(projectId)/apis/#(apiId)/entities/#(entity.id)">#(entity.name)</a></li>
+    #if(entity.selected) {
+      <li><a href="/projects/#(projectId)/apis/#(apiId)/entities/#(entity.id)">#(entity.name)</a></li>
+    } ##else() {
+      <li class="active"><a href="/projects/#(projectId)/apis/#(apiId)/entities/#(entity.id)">#(entity.name)</a></li>
+    }
   }
 </ul>
 }

@@ -14,31 +14,32 @@ final class EntityController: Controller {
     
     func index(request: Request) throws -> ResponseRepresentable {
         
-        guard let apiId = request.parameters["apiId"], let api = try Api.find(apiId), let projectId = request.parameters["projectId"] else{
+        guard let apiId = request.parameters["apiId"],
+            let api = try Api.find(apiId) else{
+                
             return Response(status: .badRequest)
         }
         
         return try ListRenderer()
             .addEntities(in: api)
-            .make(view: "entities",
-                  with: ["projectId": projectId, "apiId": apiId, "apiName": Node(api.name)],
-                  using: drop)
+            .addProject(from: request)
+            .addApi(from: request)
+            .make(view: "entities", using: drop)
 
     }
     
     func show(request: Request, entity: Entity) throws -> ResponseRepresentable {
         
-        guard let api = try Api.find(entity.apiId), let projectId = request.parameters["projectId"] else{
+        guard let api = try Api.find(entity.apiId) else{
             return Response(status: .badRequest)
         }
         
         return try ListRenderer()
             .addEntities(in: api)
+            .addProject(from: request)
+            .addApi(from: request)
             .make(view: "entity",
-                  with: ["projectId": projectId,
-                         "apiId": entity.apiId,
-                         "apiName": Node(api.name),
-                         "content": Node(entity.content),
+                  with: ["content": Node(entity.content),
                          "name": Node(entity.name),
                          "id": entity.id!],
                   using: drop)

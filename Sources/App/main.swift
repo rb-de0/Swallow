@@ -25,4 +25,6 @@ drop.resource("get/projects/:projectId/apis/:apiId/entities", EntityProvideContr
 
 drop.resource("download/projects/:projectId/apis/:apiId/entities/:entityId", EntityDownloadController(drop: drop))
 
+(drop.view as? LeafRenderer)?.stem.register(Empty())
+
 drop.run()

@@ -17,7 +17,8 @@ final class ApiRegisterController: Controller {
 
         return try ListRenderer()
             .addProjects(selectedId: id)
-            .make(view: "add-api", with: ["projectId": id] , using: drop)
+            .addProject(from: request)
+            .make(view: "add-api", using: drop)
     }
     
     // MARK: - ResourceRepresentable

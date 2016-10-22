@@ -1,7 +1,11 @@
 import Vapor
 import VaporMySQL
 
-let drop = Droplet(preparations:[Project.self, Api.self, Entity.self], providers: [VaporMySQL.Provider.self])
+let drop = Droplet()
+
+drop.addProvider(try VaporMySQL.Provider(config: drop.config))
+
+drop.preparations = [Project.self, Api.self, Entity.self]
 
 drop.resource("", ProjectController(drop: drop))
 
@@ -20,5 +24,7 @@ drop.resource("get/projects/:projectId/apis/:apiId/entities/:entityId", EntityPr
 drop.resource("get/projects/:projectId/apis/:apiId/entities", EntityProvideController(drop: drop))
 
 drop.resource("download/projects/:projectId/apis/:apiId/entities/:entityId", EntityDownloadController(drop: drop))
+
+(drop.view as? LeafRenderer)?.stem.register(Empty())
 
 drop.run()

@@ -1,4 +1,5 @@
 import Vapor
+import HTTP
 
 class ListRenderer {
     
@@ -14,9 +15,31 @@ class ListRenderer {
             }
             
             return adjusted
-        }.makeNode()
+        }.flatMap{try? $0.makeNode()}
         
-        context.updateValue(projects, forKey: "projects")
+        context.updateValue(Node(projects), forKey: "projects")
+        return self
+    }
+    
+    func addProject(from request: Request) throws -> Self{
+        guard let projectId = request.parameters["projectId"], let projectName = try Project.find(projectId)?.name else{
+            return self
+        }
+        
+        context.updateValue(projectId, forKey: "projectId")
+        context.updateValue(Node(projectName), forKey: "projectName")
+        
+        return self
+    }
+    
+    func addApi(from request: Request) throws -> Self{
+        guard let apiId = request.parameters["apiId"], let apiName = try Api.find(apiId)?.name else{
+            return self
+        }
+        
+        context.updateValue(apiId, forKey: "apiId")
+        context.updateValue(Node(apiName), forKey: "apiName")
+        
         return self
     }
     
@@ -26,9 +49,18 @@ class ListRenderer {
         return self
     }
     
-    func addEntities(in api: Api) throws -> Self{
-        let entities = try api.children("api_id", Entity.self).all().makeNode()
-        context.updateValue(entities, forKey: "entities")
+    func addEntities(in api: Api, selectedId: Node = Node(-1)) throws -> Self{
+        let entities = try api.children("api_id", Entity.self).all().map{(entity: Entity) -> Entity in
+            var adjusted = entity
+            
+            if adjusted.id?.int == selectedId.int{
+                adjusted.isSelected = true
+            }
+            
+            return adjusted
+        }.flatMap{try? $0.makeNode()}
+        
+        context.updateValue(Node(entities), forKey: "entities")
         return self
     }
     

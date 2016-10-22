@@ -10,19 +10,17 @@
     #embed("embeds/header")
     
     <div class="content">
-      <div class="container">
         <div class="row">
           <div id="leftpanel" class="col-md-2">
             #import("left")
           </div>
           
           
-          <div class="col-md-10">
+          <div id="rightpanel" class="col-md-9">
             #import("right")
           </div>
           
         </div>
-      </div>
     </div>
     
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

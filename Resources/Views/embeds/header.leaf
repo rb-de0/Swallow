@@ -1,7 +1,18 @@
 <nav class="navbar navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Swallow</a>
-        </div>
-    </div>
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">Swallow</a>
+  </div>
 </nav>
+
+#empty(projectId, projectName) {
+} ##else() {
+  <div class="nav-info">
+    <a href="/">HOME</a> ->
+    <a href="/projects/#(projectId)/apis">#(projectName)</a>
+
+    #empty(apiId, apiName) {
+    } ##else() {
+      -> <a href="/projects/#(projectId)/apis/#(apiId)/entities">#(apiName)</a>
+    }
+  </div>
+}

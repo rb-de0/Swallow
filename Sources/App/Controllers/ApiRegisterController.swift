@@ -14,10 +14,11 @@ final class ApiRegisterController: Controller {
         guard let id = request.parameters["projectId"] else{
             return Response(status: .badRequest)
         }
-        
+
         return try ListRenderer()
-            .addProjects()
-            .make(view: "app-api", with: ["projectId": id] , using: drop)
+            .addProjects(selectedId: id)
+            .addProject(from: request)
+            .make(view: "add-api", using: drop)
     }
     
     // MARK: - ResourceRepresentable

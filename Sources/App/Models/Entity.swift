@@ -13,6 +13,8 @@ struct Entity: Model{
     let createdAt: String
     var updatedAt: String?
     
+    var isSelected = false
+    
     // TODO: remove
     var exists: Bool = false
     
@@ -44,6 +46,18 @@ struct Entity: Model{
             "content": content,
             "created_at": createdAt,
             "updated_at": updatedAt
+        ])
+    }
+    
+    func makeNode() throws -> Node {
+        return try Node(node: [
+            "id": id,
+            "api_id": apiId,
+            "name": name,
+            "content": content,
+            "created_at": createdAt,
+            "updated_at": updatedAt,
+            "selected": isSelected
         ])
     }
     

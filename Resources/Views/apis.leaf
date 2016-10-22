@@ -1,10 +1,6 @@
 #extend("base")
 
 #export("left") {
-<div class="row-top">
-  <a class="btn btn-default" href="/">Add Project</a>
-</div>
-
 <div class="title">Project List</div>
 
 <ul class="nav nav-pills nav-stacked">

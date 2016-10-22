@@ -22,6 +22,13 @@ struct Project: Model{
     func makeNode(context: Context) throws -> Node {
         return try Node(node: [
             "id": id,
+            "name": name
+        ])
+    }
+    
+    func makeNode() throws -> Node {
+        return try Node(node: [
+            "id": id,
             "name": name,
             "selected": isSelected
         ])

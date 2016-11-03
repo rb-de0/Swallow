@@ -43,7 +43,7 @@ $ swift build -Xlinker -L/usr/local/lib -Xcc -I/usr/local/include -Xcc -I/usr/lo
 #### Toolbox
 
 ```bash
-# vapor build
+$ vapor build
 ```
 
 ### Generate xcode project
